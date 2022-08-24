@@ -10,7 +10,7 @@ const app = express();
 var notesData = getNotes();
 
 function getNotes() {
-  let data = fs.readFileSync("../db/db.json", "utf8");
+  let data = fs.readFileSync("./db/db.json", "utf8");
 
   let notes = JSON.parse(data);
 
@@ -39,7 +39,7 @@ app.get("/api/notes", function (req, res) {
 app.post("/api/notes", function (req, res) {
   notesData.push(req.body);
   console.log(req.body);
-  fs.writeFileSync("../db/db.json", JSON.stringify(notesData), "utf8");
+  fs.writeFileSync("./db/db.json", JSON.stringify(notesData), "utf8");
   res.json(true);
 });
 
@@ -54,7 +54,7 @@ app.delete("/api/notes/:id", function (req, res) {
   const noteIndex = notesData.indexOf(note);
   notesData.splice(noteIndex, 1);
 
-  fs.writeFileSync("../db/db.json", JSON.stringify(notesData), "utf8");
+  fs.writeFileSync("./db/db.json", JSON.stringify(notesData), "utf8");
   res.json("Note deleted");
 });
 
